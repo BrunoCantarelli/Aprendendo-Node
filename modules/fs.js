@@ -12,18 +12,33 @@ const path = require('path')
 // }) // mkdir cria uma pasta dentro do diretorio
 
 // Criar um arquivo
-fs.writeFileSync(path.join(__dirname, '/test', 'test.txt'), 'hello node!', (error) => {
-    if(error){
-        return console.log('Error: ', error)
-    }
-    console.log("Arquivo criado com sucesso!")
-})
+fs.writeFile(path.join(__dirname, '/test', 'test.txt'),
+    'hello node!',
+    (error) => {
+        if (error) {
+            return console.log('Error: ', error)
+        }
 
-// Adicionar a um arquivo
-fs.appendFile(path.join(__dirname, '/test', 'test.txt'), 'hello world!', (error) => {
-    if(error){
-        return console.log('Error: ', error)
-    }
+        console.log("Arquivo criado com sucesso!")
+        
+        // Adicionar a um arquivo
+        fs.appendFile(path.join(__dirname, '/test', 'test.txt'),
+            'hello world!',
+            (error) => {
+                if (error) {
+                    return console.log('Error: ', error)
+                }
 
-    console.log("Adicionado ao arquivo com sucesso!")
-})
+                console.log("Adicionado ao arquivo com sucesso!")
+            }
+        )
+        // Ler um arquivo
+        fs.readFile(path.join(__dirname, '/test', 'test.txt'), 'utf8', (error, data) => { //data: conteudo do arquivo que esta sendo lido
+            if (error) {
+                return console.log('Error: ', error)
+            }
+
+            console.log(data)
+        })
+    }
+)
